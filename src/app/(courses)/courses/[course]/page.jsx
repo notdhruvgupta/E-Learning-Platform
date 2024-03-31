@@ -4,12 +4,20 @@ import React, { useState } from 'react';
 import { BookMarked, BookHeart, Star, BookmarkPlus } from "lucide-react"
 import Image from "next/image"
 import Recommended from '../../_components/recommend';
+import { useRouter } from 'next/navigation';
 
 export default function CoursePageVideo({ params }) {
     const course = courselist.find((course) => course.id === parseInt(params.course))
 
     const [fav, setFav] = useState(course.favorite);
     const [enr, setEnr] = useState(course.enrolled);
+
+    const router = useRouter();
+
+    function goToChapter(chapter) {
+        console.log(chapter)
+        router.push(`/courses/${course.id}/${chapter.chapterName}`);
+    }
 
     function toggleFav() {
         setFav(prevState => !prevState)
@@ -61,7 +69,7 @@ export default function CoursePageVideo({ params }) {
                 </div>
             )}
             {course.chapters.map((ch, index) => (
-                <div className='flex gap-3 border transition ease-in-out mb-5 w-[80%] rounded-[8px] px-3 py-4' key={index}>
+                <div role='button' className='flex gap-3 border transition ease-in-out mb-5 w-[80%] rounded-[8px] px-3 py-4 hover:shadow-btn' onClick={() => goToChapter(ch)} key={index}>
                     <BookMarked />
                     <p className='text-[1.09em]'>Chapter {ch.chapterId}: {ch.chapterName}</p>
                 </div>
