@@ -1,7 +1,7 @@
 "use client"
 import { courselist } from '@/app/(dashboard)/_data/courseList';
 import React, { useState } from 'react';
-import { BookMarked, BookHeart, Star, BookmarkPlus } from "lucide-react"
+import { BookMarked, BookHeart, LockKeyhole, Star, BookmarkPlus } from "lucide-react"
 import Image from "next/image"
 import Recommended from '../../_components/recommend';
 import { useRouter } from 'next/navigation';
@@ -41,12 +41,13 @@ export default function CoursePageVideo({ params }) {
                                 {course.title}
                             </p>
                             <div role='button' onClick={toggleFav} className={`gap-2 rounded-md px-2 py-1 transition-all border-2 border-[#fbe595] hover:bg-[#fff68e] hover:shadow-btn inline-flex items-center ${fav ? 'bg-[#fff68e]' : 'none'}`}>
-                                <Star size={18} fill={fav ? '#FFC700' : 'none'} color={fav ? '#FFC700' : 'black'}/>
+                                <Star size={18} fill={fav ? '#FFC700' : 'none'} color={fav ? '#FFC700' : 'black'} />
                                 <p className='font-[500] '>Favorite</p>
                             </div>
                             <div role='button' onClick={toggleEnrolled} className={`gap-2 rounded-md px-2 py-1 transition-all border-2 border-[#addffa] hover:bg-[#b7f4ff] hover:shadow-btn inline-flex items-center ${enr ? 'bg-[#b7f4ff]' : 'none'}`}>
-                                <BookmarkPlus size={20} fill={enr ? '#008DDA' : 'none'} color={enr ? '#b7f4ff' : 'black'}/>
-                                <p className='font-[500] pr-1'>Enroll</p>
+                                <BookmarkPlus size={20} fill={enr ? '#008DDA' : 'none'} color={enr ? '#b7f4ff' : 'black'} />
+                                {enr ? (<p className='font-[500] pr-1'>Enrolled</p>) :
+                                    (<p className='font-[500] pr-1'>Enroll</p>)}
                             </div>
                         </div>
                         <div className='flex gap-3'>
@@ -69,13 +70,20 @@ export default function CoursePageVideo({ params }) {
                 </div>
             )}
             {course.chapters.map((ch, index) => (
-                <div role='button' className='flex gap-3 border transition ease-in-out mb-5 w-[80%] rounded-[8px] px-3 py-4 hover:shadow-btn' onClick={() => goToChapter(ch)} key={index}>
-                    <BookMarked />
+                <div
+                    role='button'
+                    className={`flex gap-3 border transition ease-in-out mb-5 w-[80%] rounded-[8px] px-3 py-4 hover:shadow-btn ${index !== 0 ? ' text-gray-400 cursor-not-allowed' : ''}`}
+                    onClick={() => index === 0 && goToChapter(ch)}
+                    key={index}
+                    tabIndex={0} // Add this to make the div focusable
+                    aria-disabled={index === 0} // Add this for accessibility
+                >
+                    {index === 0 ? <BookMarked /> : <LockKeyhole />}
                     <p className='text-[1.09em]'>Chapter {ch.chapterId}: {ch.chapterName}</p>
                 </div>
             ))}
             <hr className='w-[85%] my-[2em]' />
-            <Recommended course={[course]}/>
+            <Recommended course={[course]} />
         </div>
     );
 }

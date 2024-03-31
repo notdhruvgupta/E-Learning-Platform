@@ -14,7 +14,7 @@ export default function CourseCards(
 
     function clicked() {
         console.log("Pressed", title)
-        router.push(`courses/${id}`);
+        router.push(`/courses/${id}`);
     }
 
     return (
