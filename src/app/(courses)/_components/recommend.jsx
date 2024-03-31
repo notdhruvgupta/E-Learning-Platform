@@ -45,6 +45,7 @@ export default function Recommended({ course }) {
             <div className='grid grid-cols-4'>
                 {similarCourses.map((course) => (
                     <CourseCards
+                        key={course.id}
                         id={course.id}
                         image={course.image}
                         title={course.title}

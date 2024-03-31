@@ -6,7 +6,7 @@ export default function Favorites() {
     return (
         <div className='flex'>
             {courselist.map((course) => (
-                <div>
+                <div key={course.id}>
                     {course.favorite && (
                         <CourseCards
                             id={course.id}

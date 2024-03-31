@@ -28,7 +28,7 @@ export default function CourseCards(
                     <div className="flex gap-1 text-[1.1em] font-semibold items-center">
                         <div className='flex'>
                             {Array.from({ length: rating }, (_, index) => (
-                                <Star fill='#FCDC2A' strokeWidth={0} size={20} />
+                                <Star key={index} fill='#FCDC2A' strokeWidth={0} size={20} />
                             ))}
                         </div>
                         {rating}

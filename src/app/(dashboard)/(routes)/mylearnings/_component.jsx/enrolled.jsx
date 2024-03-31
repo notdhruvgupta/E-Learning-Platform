@@ -6,7 +6,7 @@ export default function Enrolled() {
     return (
         <div className='flex'>
             {courselist.map((course) => (
-                <div>
+                <div key={course.id}>
                     {course.enrolled && (
                         <CourseCards
                             id={course.id}
