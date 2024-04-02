@@ -22,13 +22,13 @@ export default function CourseChapter({ params }) {
       <div>
         <p className='text-[1.5em]  font-bold mb-3'>{normalText}</p>
         <MuxPlayer
-          className='w-[70%] rounded-md overflow-hidden'
-          streamType="on-demand"
-          playbackId="CWC01WK5701uScDOGIn00Jgq6keFgK200cWkG01e4SFG4yGI"
-          metadataVideoTitle="Placeholder (optional)"
-          metadataViewerUserId="Placeholder (optional)"
-          primaryColor="#FFFFFF"
-          secondaryColor="#000000"
+         className='w-[70%]'
+          playbackId="EcHgOK9coz5K4rjSwOkoE7Y7O01201YMIC200RI6lNxnhs"
+          metadata={{
+            video_id: "video-id-54321",
+            video_title: "Test video title",
+            viewer_user_id: "user-id-007",
+          }}
         />
       </div>
       <div className='gap-4 flex'>
